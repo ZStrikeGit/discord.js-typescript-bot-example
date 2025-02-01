@@ -1,7 +1,6 @@
 import { Client, CommandInteraction } from 'discord.js';
 import Discord from "discord.js";
 import fs from "fs";
-//import bruh from './commands/radar';
 export class CommandHandler {
     private client: Client;
     private commands: Discord.Collection<string,any>;
@@ -17,10 +16,9 @@ export class CommandHandler {
     private async loadCommands() {
         const commandFiles = fs.readdirSync('./commands/').filter(f => f.endsWith('.ts'))
         for (const file of commandFiles) {
-            console.log(file)
-        const rawcmd = await import(`./commands/${file}`)
-        const command = rawcmd.default
-        console.log("BRUHH",command)
+            console.log("Processing... ", file)
+        const cmdExport = await import(`./commands/${file}`)
+        const command = cmdExport.default
         this.commands.set(command.data.name, command);
     }
 }
