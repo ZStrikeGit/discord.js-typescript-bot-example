@@ -30,7 +30,7 @@ export class CommandHandler {
         if (command) {
             await command.execute(interaction);
         } else {
-            await interaction.reply({ content: 'Command not found!', ephemeral: true });
+            await interaction.reply({ content: 'Command not found!', flags: [Discord.MessageFlags.Ephemeral]  });
         }
     }
 }
